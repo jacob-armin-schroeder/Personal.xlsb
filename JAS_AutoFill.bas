@@ -1,72 +1,50 @@
-Attribute VB_Name = "JAS_AutoFill"
 Sub AutoFill()
-Attribute AutoFill.VB_ProcData.VB_Invoke_Func = "D\n14"
-'
 ' AutoFill Macro
-' Created on February 8, 2017 by Jacob Schroeder
+' Created:  February 8, 2017 by Jacob Schroeder
+' Revised:  April 23, 2026
+' Shortcut: Ctrl+Shift+D
+'
+' Fills the active cell's contents and formatting downward, using an adjacent
+' column to determine fill length. Prefers the left column; falls back to right.
+' Column A always uses the right column as reference.
+' Treats error values (#N/A, #REF!, etc.) as non-empty.
 
-' Keyboard Shortcut: Ctrl+Shift+D
-
-'This macro fills a cell's contents and formatting down the length of an adjacent column, with
-'priority given to the column to the left of the active cell.
-
-Dim ColumnID As Integer
-
-ColumnID = ActiveCell.Column
-
-Select Case ColumnID
-
-    Case 1
-        
-        'Checks to see if the column to the RIGHT extends TWO rows beyond the active cell
-        If Not ActiveCell.Offset(2, 1).Value = "" And Not ActiveCell.Offset(1, 1).Value = "" Then
-            
-            Selection.Offset(0, 1).Select   'Same as above, for column to the right
-            Range(Selection, Selection.End(xlDown)).Select
-            Selection.Offset(0, -1).Select
-            Selection.FillDown
-
-        'Checks to see if the column to the RIGHT only extends ONE row beyond the active cell
-        ElseIf ActiveCell.Offset(2, 1).Value = "" And Not ActiveCell.Offset(1, 1).Value = "" Then
-            
-            Range(Selection, Selection.Offset(1, 0)).Select
-            Selection.FillDown
+    Dim startCell As Range
+    Set startCell = ActiveCell
     
-        End If
+    ' Identify reference cell in adjacent column
+    Dim refCell As Range
+    If startCell.Column = 1 Then
+        Set refCell = startCell.Offset(0, 1)                        ' Column A: right only
+    ElseIf CellHasContent(startCell.Offset(1, -1)) Then
+        Set refCell = startCell.Offset(0, -1)                       ' Left column preferred
+    ElseIf CellHasContent(startCell.Offset(1, 1)) Then
+        Set refCell = startCell.Offset(0, 1)                        ' Right column fallback
+    Else
+        Exit Sub                                                     ' No adjacent data found
+    End If
     
-    Case Else
+    ' Determine number of rows to fill based on reference column depth
+    Dim fillRows As Long
+    If Not CellHasContent(refCell.Offset(1, 0)) Then
+        Exit Sub                                                     ' Nothing below reference cell
+    ElseIf Not CellHasContent(refCell.Offset(2, 0)) Then
+        fillRows = 1                                                 ' Only one row below
+    Else
+        fillRows = refCell.End(xlDown).Row - startCell.Row          ' Fill to bottom of ref column
+    End If
+    
+    startCell.Resize(fillRows + 1, 1).FillDown
 
-    'First checking to see if the column to the LEFT extends TWO rows beyond the active cell
-    If Not ActiveCell.Offset(2, -1).Value = "" And Not ActiveCell.Offset(1, -1).Value = "" Then
-    
-            Selection.Offset(0, -1).Select                  'Selects cell to the left of the active cell
-            Range(Selection, Selection.End(xlDown)).Select  'Extends selection to bottom of left column
-            Selection.Offset(0, 1).Select       'Offsets entire selection back to the column to be filled
-            Selection.FillDown  'Fills the originally selected cell down the length of the column to the left
-        
-        'Checks to see if the column to the LEFT only extends ONE row beyond the active cell
-        ElseIf ActiveCell.Offset(2, -1).Value = "" And Not ActiveCell.Offset(1, -1).Value = "" Then
-            
-            Range(Selection, Selection.Offset(1, 0)).Select 'Extends the selection downward by one row
-            Selection.FillDown  'Fills the originally selected cell down one row
-            
-                'Checks to see if the column to the RIGHT extends TWO rows beyond the active cell
-        ElseIf Not ActiveCell.Offset(2, 1).Value = "" And Not ActiveCell.Offset(1, 1).Value = "" Then
-            
-            Selection.Offset(0, 1).Select   'Same as above, for column to the right
-            Range(Selection, Selection.End(xlDown)).Select
-            Selection.Offset(0, -1).Select
-            Selection.FillDown
-
-        'Checks to see if the column to the RIGHT only extends ONE row beyond the active cell
-        ElseIf ActiveCell.Offset(2, 1).Value = "" And Not ActiveCell.Offset(1, 1).Value = "" Then
-            
-            Range(Selection, Selection.Offset(1, 0)).Select
-            Selection.FillDown
-    
-        End If
-
-End Select
-    
 End Sub
 
+
+Private Function CellHasContent(c As Range) As Boolean
+' Returns True if the cell contains any value, including error values.
+' A direct comparison like c.Value <> "" throws a type mismatch on error values.
+    If IsError(c.Value) Then
+        CellHasContent = True
+    Else
+        CellHasContent = (c.Value <> "")
+    End If
+End Function
