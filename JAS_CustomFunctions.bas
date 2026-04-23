@@ -28,7 +28,7 @@ Function DistanceToLine(LineXs As Variant, LineYs As Variant, PointX As Variant,
     x_0 = PointX: y_0 = PointY
     x(1) = Application.Min(LineXs): x(2) = Application.Max(LineXs)
     y(1) = Application.Index(LineYs, Application.Match(x(1), LineXs, True))
-    y(2) = Application.Index(LineYs, Application.Match(x(2), LineYs, True))
+    y(2) = Application.Index(LineYs, Application.Match(x(2), LineXs, True))
     
 'Calculate line coefficients
 
