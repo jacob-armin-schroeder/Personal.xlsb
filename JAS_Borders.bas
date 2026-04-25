@@ -1,13 +1,8 @@
 Attribute VB_Name = "JAS_Borders"
 '
 Option Explicit
-' Border_Table_Heading Macro
-'Created 10/6/2015 by Jacob Schroeder
-'Revised 4/24/2026 by Jacob Schroeder
-'
-' Keyboard Shortcut: Ctrl+h
-'
 Sub Border_Table_Heading()
+' Recommended Keyboard Shortcut: Ctrl+h
     With Selection
         .HorizontalAlignment = xlCenterAcrossSelection
         .VerticalAlignment = xlBottom
@@ -20,12 +15,8 @@ Sub Border_Table_Heading()
     End With
 End Sub
 
-' BorderLinesVertical Macro
-' Edited 4/24/2026 by Jacob A. Schroeder
-'
-' Keyboard Shortcut: Ctrl+e
-'
 Sub VerticalLines()
+' Recommended Keyboard Shortcut: Ctrl+e
     Dim b As Border
     Set b = Selection.Borders(xlInsideVertical)
     If b.LineStyle = xlNone Then
@@ -37,13 +28,8 @@ Sub VerticalLines()
     End If
 End Sub
 
-' BorderLinesHorizontal Macro
-' Created 5/30/2018 by Jacob Schroeder
-' Edited 4/24/2026 by Jacob Schroeder
-'
-' Keyboard Shortcut: Ctrl+r
-'
 Sub HorizontalLines()
+' Recommended Keyboard Shortcut: Ctrl+r
     Dim b As Border
     Set b = Selection.Borders(xlInsideHorizontal)
     ' Cycles hairline > thin > medium > none
@@ -59,12 +45,8 @@ Sub HorizontalLines()
     End If
 End Sub
 
-' BorderLinesOutline Macro
-' Macro edited 4/24/2026 by Jacob Schroeder
-'
-' Keyboard Shortcut: Ctrl+o
-'
 Sub Border_Outline()
+' Recommended Keyboard Shortcut: Ctrl+o
   With Selection
     If .Borders(xlEdgeLeft).LineStyle = xlNone Then
         .BorderAround Weight:=xlThin
@@ -79,12 +61,8 @@ Sub Border_Outline()
   End With
 End Sub
 
-' Border_Remove_All Macro
-' Edited 4/24/2026 by Jacob Schroeder
-'
-' Keyboard Shortcut: Ctrl+n
-'
 Sub Border_Remove_All()
+' Recommended Keyboard Shortcut: Ctrl+n
 ' Clears all borders and fill from selection
     Selection.Borders.LineStyle = xlNone
     With Selection
@@ -96,17 +74,18 @@ Sub Border_Remove_All()
 End Sub
 
 Sub FillBright()
+' Recommended keyboard shortcut: Ctrl+Shift+B
 ' Cycles selection background through light colors, then clears.
 ' Font is always set to automatic.
 ' Cycle: None > #ECECEC > #BFE9FF > #FDEAD7 > #DCEFD8 > #FFFFFF > None
 
     Dim colors(0 To 5) As Long
     colors(0) = -1                      ' Sentinel for "no fill"
-    colors(1) = RGB(236, 236, 236)      ' #ECECEC
-    colors(2) = RGB(191, 233, 255)      ' #BFE9FF
-    colors(3) = RGB(253, 234, 215)      ' #FDEAD7
-    colors(4) = RGB(220, 239, 216)      ' #DCEFD8
-    colors(5) = RGB(255, 255, 255)      ' #FFFFFF
+    colors(1) = RGB(236, 236, 236)      ' #ECECEC - light gray
+    colors(2) = RGB(191, 233, 255)      ' #BFE9FF - light blue
+    colors(3) = RGB(253, 234, 215)      ' #FDEAD7 - light orange
+    colors(4) = RGB(220, 239, 216)      ' #DCEFD8 - light green
+    colors(5) = RGB(255, 255, 255)      ' #FFFFFF - white
 
     Dim currentIndex As Integer
     currentIndex = GetColorIndex(colors)
@@ -125,17 +104,18 @@ Sub FillBright()
 End Sub
 
 Sub FillDark()
+' Recommended keyboard shortcut: Ctrl+Shift+D
 ' Cycles selection background through dark colors, then clears.
 ' Font is set to white for all dark colors; automatic when fill is removed.
-' Cycle: None > #262626 > #005677 > #D6700A > #417A34 > #000000 > None
+' Cycle: None > #404040 > #005677 > #D6700A > #417A34 > #000000 > None
 
     Dim colors(0 To 5) As Long
     colors(0) = -1                      ' Sentinel for "no fill"
-    colors(1) = RGB(38, 38, 38)         ' #262626
-    colors(2) = RGB(0, 86, 119)         ' #005677
-    colors(3) = RGB(214, 112, 10)       ' #D6700A
-    colors(4) = RGB(65, 122, 52)        ' #417A34
-    colors(5) = RGB(0, 0, 0)            ' #000000
+    colors(1) = RGB(64, 64, 64)         ' #404040 - dark gray
+    colors(2) = RGB(0, 86, 119)         ' #005677 - dark blue
+    colors(3) = RGB(214, 112, 10)       ' #D6700A - dark orange
+    colors(4) = RGB(65, 122, 52)        ' #417A34 - dark green
+    colors(5) = RGB(0, 0, 0)            ' #000000 - black
 
     Dim currentIndex As Integer
     currentIndex = GetColorIndex(colors)
