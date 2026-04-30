@@ -2,8 +2,7 @@ Attribute VB_Name = "PERSONAL_NumberFormats"
 Option Explicit
 
 Sub NumberFormatDecimal()
-Attribute NumberFormatDecimal.VB_ProcData.VB_Invoke_Func = "A\n14"
-' Shortcut: Ctrl+Shift+A
+' Recommended Shortcut: Ctrl+Shift+A
 ' Cycles: #,##0 > #,##0.0 > #,##0.00 > #,##0.000 > (repeat)
 ' Applies right alignment and turns off wrap text.
     CycleNumberFormat Array( _
@@ -17,8 +16,7 @@ Attribute NumberFormatDecimal.VB_ProcData.VB_Invoke_Func = "A\n14"
 End Sub
 
 Sub NumberFormatPercentage()
-Attribute NumberFormatPercentage.VB_ProcData.VB_Invoke_Func = "P\n14"
-' Shortcut: Ctrl+Shift+P
+' Recommended Shortcut: Ctrl+Shift+P
 ' Cycles: #,##0% > #,##0.0% > #,##0.00% > #,##0.000% > (repeat)
 ' Applies right alignment and turns off wrap text.
     CycleNumberFormat Array( _
@@ -29,8 +27,7 @@ Attribute NumberFormatPercentage.VB_ProcData.VB_Invoke_Func = "P\n14"
 End Sub
 
 Sub NumberFormatCurrency()
-Attribute NumberFormatCurrency.VB_ProcData.VB_Invoke_Func = "C\n14"
-' Shortcut: (assign as needed)
+' Recommended Shortcut: Ctrl+Shift+C
 ' Cycles through simple, red-negative, and accounting variants at 0 and 2 decimal places.
 ' Applies right alignment and turns off wrap text.
     CycleNumberFormat Array( _
@@ -45,8 +42,7 @@ Attribute NumberFormatCurrency.VB_ProcData.VB_Invoke_Func = "C\n14"
 End Sub
 
 Sub NumberFormatDateTime()
-Attribute NumberFormatDateTime.VB_ProcData.VB_Invoke_Func = "T\n14"
-' Shortcut: Ctrl+Shift+T
+' Recommended Shortcut: Ctrl+Shift+T
 ' Cycles through common date and time formats. Leaves alignment unchanged.
 ' Turns off wrap text.
     CycleNumberFormat Array( _

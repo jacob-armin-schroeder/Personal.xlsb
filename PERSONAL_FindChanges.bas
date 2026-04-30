@@ -2,8 +2,7 @@ Attribute VB_Name = "PERSONAL_FindChanges"
 Option Explicit
 
 Sub FindNextChange()
-Attribute FindNextChange.VB_ProcData.VB_Invoke_Func = "m\n14"
-' Shortcut: Ctrl+M
+' Recommended Shortcut: Ctrl+M
 ' Navigates DOWN the active column to the next cell containing a value
 ' different from the active cell. Useful for stepping through any column
 ' where values change in blocks (e.g., True/False flags, category codes,
@@ -16,7 +15,7 @@ End Sub
 
 Sub FindPrevChange()
 Attribute FindPrevChange.VB_ProcData.VB_Invoke_Func = "M\n14"
-' Shortcut: Ctrl+Shift+M
+' Recommended Shortcut: Ctrl+Shift+M
 ' Navigates UP the active column to the previous cell containing a value
 ' different from the active cell. See FindNextChange for full description.
 '
@@ -94,7 +93,7 @@ Private Sub FlashCell(ByVal c As Range)
 
     Dim startTime As Double
     startTime = Timer
-    Do While Timer >= startTime And Timer < startTime + 0.3
+    Do While (Timer - startTime) <0.3 And (Timer - startTime) >= 0
         DoEvents
     Loop
 
@@ -111,7 +110,7 @@ End Sub
 
 
 Private Function SafeCellString(ByVal c As Range) As String
-' Safely converts any cell value — including errors — to a string for comparison.
+' Safely converts any cell value ï¿½ including errors ï¿½ to a string for comparison.
 ' Error values are prefixed with "ERR:" so distinct error types are treated as distinct.
     If IsError(c.Value) Then
         SafeCellString = "ERR:" & CStr(c.Value)
