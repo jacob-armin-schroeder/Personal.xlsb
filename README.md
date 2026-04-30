@@ -2,6 +2,8 @@
 
 A collection of Excel VBA macros designed to speed up common formatting and navigation tasks. All macros are intended for installation in Excel's **Personal Macro Workbook** (`PERSONAL.XLSB`), making them available across all workbooks.
 
+See SHORTCUTS.md for a quick reference of all keyboard shortcuts.
+
 ---
 
 ## Modules
@@ -13,34 +15,39 @@ A collection of Excel VBA macros designed to speed up common formatting and navi
 | `PERSONAL_FindChanges.bas` | Navigates a column by jumping to the next or previous value change |
 | `PERSONAL_NumberFormats.bas` | Cycles number formats (decimal, percentage, currency, date/time) through common variants |
 | `PERSONAL_RowColumnSize.bas` | Adjusts row height and column width, including autofit |
+| `PERSONAL_Installer.bas` | One-time installer: downloads all modules from GitHub and assigns shortcuts |
 
 ---
 
 ## Installation
 
-1. Open Excel and press **Alt+F11** to open the Visual Basic Editor.
-2. In the Project Explorer, expand **VBAProject (PERSONAL.XLSB)**.  
-   *(If PERSONAL.XLSB does not exist, record any macro with "Personal Macro Workbook" selected as the store location, then delete the recorded macro — this creates the file.)*
-3. Right-click **Modules** → **Import File**, and select each `.bas` file.
-4. Save and close the VBE. Restart Excel if prompted.
+### Automatic (recommended)
 
-### Assigning Keyboard Shortcuts
+1. Download `PERSONAL_Installer.bas` from this repository.
+2. Open Excel and press **Alt+F11** to open the Visual Basic Editor.
+3. In the Project Explorer, right-click any module under **VBAProject (PERSONAL.XLSB)** → **Import File** → select `PERSONAL_Installer.bas`.
+*(If PERSONAL.XLSB does not exist, record any macro with "Personal Macro Workbook" selected as the store location, then delete the recorded macro — this creates the file.)*
+4. Press **Alt+F8**, select InstallPackage, and click **Run**.
+5. Follow the prompts. The installer will download all modules, offer to assign keyboard shortcuts, and confirm when complete.
+6. After installation, delete the installer module: right-click **PERSONAL_Installer** in the Project Explorer → **Remove Module**.
 
-Each macro includes a recommended shortcut in its header comment. To assign them:
+> **Requirement:** The installer needs access to the VBA project object model. If it reports an access error, go to **File → Options → Trust Center → Trust Center Settings → Macro Settings** and check **Trust access to the VBA project object model**.
 
-1. Go to **Developer** → **Macros** (or press Alt+F8).
-2. Select a macro from the list and click **Options**.
-3. Enter the shortcut key as noted in the table below.
-
-> **Note:** Shortcuts listed as `Ctrl+Shift+Letter` require entering the uppercase letter in the shortcut field.
-
+### Manual
+ 
+1. Download each `.bas` file from this repository.
+2. Open Excel and press **Alt+F11**.
+3. In the Project Explorer, right-click **Modules** under **VBAProject (PERSONAL.XLSB)** → **Import File**, and select each `.bas` file.
+4. Assign keyboard shortcuts manually: press **Alt+F8**, select a macro, click **Options**, and enter the shortcut key. See [SHORTCUTS.md](SHORTCUTS.md) for the full list.
+> **Note:** `Ctrl+Shift+Letter` shortcuts require entering the uppercase letter in the shortcut field.
+ 
 ---
-
+ 
 ## Macro Reference
 
 ### AutoFill — `PERSONAL_AutoFill.bas`
 
-**Shortcut:** `Ctrl+Shift+D`
+**Shortcut:** `Ctrl+D`
 
 Fills the active cell's content and formatting downward to the last continuous row used in an adjacent column.
 
@@ -111,14 +118,25 @@ All format macros (except DateTime) apply right alignment and turn off wrap text
 
 ---
 
+## Customizing
+ 
+All modules are open for editing. The macros most likely to benefit from customization are the cycling ones:
+ 
+- **`FillBright` / `FillDark`** — color arrays are defined at the top of each sub. Add, remove, or replace RGB values to change the cycle.
+- **`NumberFormatCurrency`** — the format string array can be trimmed or extended with additional currency formats.
+- **`NumberFormatDateTime`** — add or remove format strings to match the date conventions used in your work.
+When editing, note that all modules use `Option Explicit` — any new variables must be declared with `Dim` before use.
+ 
+---
+
 ## Compatibility
 
-Tested in Excel for Windows. Macros use standard Excel object model calls and should be compatible with Excel 2016 and later. Not tested in Excel for Mac.
+Tested in Excel for Windows (Excel 2016 and later). Not tested in Excel for Mac.
 
 ---
 
 ## Notes
 
-- All modules use `Option Explicit`, requiring all variables to be declared before use.
-- Shortcut conflicts with existing Excel defaults are possible — verify against your Excel version before assigning.
 - These macros operate on the active cell or selection and do not modify any other workbook state.
+- The installer requires an internet connection to download files from GitHub. For offline installation, use the manual method.
+- Shortcut assignments are stored in PERSONAL.XLSB and persist across Excel sessions.
