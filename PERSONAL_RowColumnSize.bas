@@ -10,7 +10,7 @@ Sub Autofit()
 End Sub
 
 Sub ColumnWidthIncrease()
-' Recommended Shortcut: Ctrl+q
+' Recommended Shortcut: Ctrl+Q
     AdjustColumnWidth 1
 End Sub
 
@@ -20,7 +20,7 @@ Sub ColumnWidthDecrease()
 End Sub
 
 Sub RowHeightIncrease()
-' Recommended Shortcut: Ctrl+r
+' Recommended Shortcut: Ctrl+R
     AdjustRowHeight 5
 End Sub
 

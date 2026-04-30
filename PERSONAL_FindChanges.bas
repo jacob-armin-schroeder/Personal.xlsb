@@ -14,7 +14,6 @@ Sub FindNextChange()
 End Sub
 
 Sub FindPrevChange()
-Attribute FindPrevChange.VB_ProcData.VB_Invoke_Func = "M\n14"
 ' Recommended Shortcut: Ctrl+Shift+M
 ' Navigates UP the active column to the previous cell containing a value
 ' different from the active cell. See FindNextChange for full description.

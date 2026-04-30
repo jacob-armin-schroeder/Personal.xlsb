@@ -57,11 +57,11 @@ Fills the active cell's content and formatting downward to the last continuous r
 
 | Macro | Shortcut | Behavior |
 |---|---|---|
-| `Border_Table_Heading` | `Ctrl+H` | Applies bold, center-across-selection, wrap text, inside vertical lines, and a thin outer border |
+| `Border_Table_Heading` | `Ctrl+Shift+H` | Applies bold, center-across-selection, wrap text, inside vertical lines, and a thin outer border |
 | `VerticalLines` | `Ctrl+E` | Cycles inside vertical borders: thin → medium → none |
 | `HorizontalLines` | `Ctrl+Shift+E` | Cycles inside horizontal borders: hairline → thin → medium → none |
-| `Border_Outline` | `Ctrl+O` | Cycles outer border: thin → medium → none |
-| `Clear_Formatting` | `Ctrl+N` | Removes all borders and fill; resets font color to automatic |
+| `Border_Outline` | `Ctrl+Shift+O` | Cycles outer border: thin → medium → none |
+| `Clear_Formatting` | `Ctrl+Shift+N` | Removes all borders and fill; resets font color to automatic |
 | `FillBright` | `Ctrl+Shift+B` | Cycles background through light colors: gray → blue → orange → green → white → none |
 | `FillDark` | `Ctrl+Shift+D` | Cycles background through dark colors (with white font): gray → blue → orange → green → black → none |
 

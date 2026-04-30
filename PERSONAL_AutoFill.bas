@@ -2,7 +2,7 @@ Attribute VB_Name = "PERSONAL_AutoFill"
 Option Explicit
 
 Sub AutoFill()
-' Recommended Shortcut: Ctrl+d
+' Recommended Shortcut: Ctrl+D
 '
 ' Fills the active cell's contents and formatting downward, using an adjacent
 ' column to determine fill length. Prefers the left column; falls back to right.

@@ -2,7 +2,7 @@ Attribute VB_Name = "PERSONAL_Borders"
 Option Explicit
 
 Sub Border_Table_Heading()
-' Recommended Keyboard Shortcut: Ctrl+h
+' Recommended Keyboard Shortcut: Ctrl+Shift+H
     With Selection
         .HorizontalAlignment = xlCenterAcrossSelection
         .VerticalAlignment = xlBottom
@@ -16,7 +16,7 @@ Sub Border_Table_Heading()
 End Sub
 
 Sub VerticalLines()
-' Recommended Keyboard Shortcut: Ctrl+e
+' Recommended Keyboard Shortcut: Ctrl+E
     Dim b As Border
     Set b = Selection.Borders(xlInsideVertical)
     If b.LineStyle = xlNone Then
@@ -46,7 +46,7 @@ Sub HorizontalLines()
 End Sub
 
 Sub Border_Outline()
-' Recommended Keyboard Shortcut: Ctrl+o
+' Recommended Keyboard Shortcut: Ctrl+Shift+O
   With Selection
     If .Borders(xlEdgeLeft).LineStyle = xlNone Then
         .BorderAround Weight:=xlThin
@@ -62,7 +62,7 @@ Sub Border_Outline()
 End Sub
 
 Sub Clear_Formatting()
-' Recommended Keyboard Shortcut: Ctrl+n
+' Recommended Keyboard Shortcut: Ctrl+Shift+N
 ' Clears all borders and fill from selection
     Selection.Borders.LineStyle = xlNone
     With Selection
