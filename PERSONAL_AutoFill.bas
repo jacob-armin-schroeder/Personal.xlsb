@@ -10,16 +10,25 @@ Sub AutoFill()
 ' Treats error values (#N/A, #REF!, etc.) as non-empty.
 
     Dim startCell As Range
-    Set startCell = ActiveCell
+    Set startCell = Selection.Cells(1, 1)
+
+    Dim selCols As Long
+    selCols = Selection.Columns.Count 
     
+    Dim leftCol As Long
+    Dim rightCol As Long
+    leftCol = startCell.Column
+    rightCol = startCell.Column + selCols - 1
+
+
     ' Identify reference cell in adjacent column
     Dim refCell As Range
-    If startCell.Column = 1 Then
-        Set refCell = startCell.Offset(0, 1)                        ' Column A: right only
-    ElseIf CellHasContent(startCell.Offset(1, -1)) Then
-        Set refCell = startCell.Offset(0, -1)                       ' Left column preferred
-    ElseIf CellHasContent(startCell.Offset(1, 1)) Then
-        Set refCell = startCell.Offset(0, 1)                        ' Right column fallback
+    If leftCol = 1 Then
+        Set refCell = Cells(startCell.Row, rightCol + 1)            ' Column A: right only
+    ElseIf CellHasContent(Cells(startCell.Row + 1, leftCol - 1)) Then
+        Set refCell = Cells(startCell.Row, leftCol - 1)             ' Left column preferred
+    ElseIf CellHasContent(Cells(startCell.Row + 1, rightCol + 1)) Then
+        Set refCell = Cells(startCell.Row, rightCol + 1)            ' Right column fallback
     Else
         Exit Sub                                                     ' No adjacent data found
     End If
@@ -34,7 +43,7 @@ Sub AutoFill()
         fillRows = refCell.End(xlDown).Row - startCell.Row          ' Fill to bottom of ref column
     End If
     
-    startCell.Resize(fillRows + 1, 1).FillDown
+    startCell.Resize(fillRows + 1, selCols).FillDown
 
 End Sub
 
